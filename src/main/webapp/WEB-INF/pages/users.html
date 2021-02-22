@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список всех пользователей</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>LastName</th>
+            <th>Age</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getId()}"></td>
+            <td th:utext="${user.getName()}"></td>
+            <td th:utext="${user.getLastName()}"></td>
+            <td th:utext="${user.getAge()}"></td>
+            <td>
+                <a th:href="@{/edit/{id}(id=${user.getId()})}">edit</a>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                    <input type="submit" value="delete">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <form th:method="POST" th:action="@{/users}" th:object="${newUser}">
+            <label for="name">Имя: </label>
+            <input type="text" th:field="*{name}" id="name">
+            <br/>
+            <label for="lastName">Фамилия: </label>
+            <input th:type="text" th:field="*{lastName}" id="lastName">
+            <br/>
+            <label for="age">Возраст: </label>
+            <input th:type="text" th:field="*{age}" id="age">
+            <br/>
+            <br/>
+            <input type="submit" value="create">
+        </form>
+    </div>
+</body>
+</html>
