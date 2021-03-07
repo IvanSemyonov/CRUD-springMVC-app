@@ -3,6 +3,7 @@ package ru.javamentor.web.config;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 

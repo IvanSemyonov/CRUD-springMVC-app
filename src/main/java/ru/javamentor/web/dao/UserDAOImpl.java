@@ -28,6 +28,18 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
+    public User getUser(String name) {
+        String hql = "select u from User as u where u.username=?1";
+        TypedQuery<User> query = em.createQuery(hql, User.class);
+        query.setParameter(1, name);
+        List<User> users = query.getResultList();
+        if (users.isEmpty()) {
+            return null;
+        }
+        return users.get(0);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         TypedQuery<User> query = em.createQuery("select u from User as u", User.class);
         return query.getResultList();
